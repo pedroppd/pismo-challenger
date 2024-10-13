@@ -38,18 +38,18 @@ Este projeto implementa um sistema de transações financeiras associadas a cont
 - JDK 21
 - Maven 3.x
 
-## Executando a Aplicação
+## Executando a Aplicação via container
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/pedroppd/pismo-challenger.git
+    ./mvnw clean package
     ```
 2. Acesse o diretório do projeto:
     ```bash
-    cd customer-transactions
+    docker build -t customer-transactions .
     ```
 3. Execute a aplicação com Maven:
     ```bash
-    ./mvnw spring-boot:run
+    docker run -p 8080:8080 customer-transactions
     ```
 
 A aplicação estará disponível em `http://localhost:8080`.
