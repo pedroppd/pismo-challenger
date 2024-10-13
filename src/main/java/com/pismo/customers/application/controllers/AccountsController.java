@@ -27,7 +27,7 @@ public class AccountsController {
     @PostMapping
     public ResponseEntity<AccountResponseDTO> register(@RequestBody AccountRequestDTO accountRequestDTO,
                                                        UriComponentsBuilder uriBuilder) {
-        logger.info("Iniciando chamada para cadastrar uma conta");
+        logger.info("Starting the account creation...");
         final AccountResponseDTO accountResponse = accountService.save(accountRequestDTO);
         final URI uri = uriBuilder.path("/accounts/{accountId}").buildAndExpand(accountResponse.getId()).toUri();
         return ResponseEntity.created(uri).body(accountResponse);
@@ -35,6 +35,7 @@ public class AccountsController {
 
     @GetMapping("/{accountId}")
     public ResponseEntity<AccountResponseDTO> getById(@PathVariable Long accountId) {
+        logger.info("Starting account search {} ...", accountId);
         final AccountResponseDTO accountResponse = accountService.getById(accountId);
         return ResponseEntity.ok().body(accountResponse);
     }

@@ -8,6 +8,7 @@ import com.pismo.customers.domain.enums.OperationTypeEnum;
 import com.pismo.customers.domain.ports.repositories.AccountRepositoryPort;
 import com.pismo.customers.domain.ports.repositories.TransactionRepositoryPort;
 import com.pismo.customers.infra.adapters.entities.TransactionEntity;
+import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
 import com.pismo.customers.infra.configuration.exception.SaveTransactionException;
 import org.springframework.data.util.Pair;
 
@@ -50,7 +51,7 @@ public class TransactionServiceImpl {
     private Pair<Account, OperationTypeEnum> getAccountAndOperationId(TransactionRequestDTO transactionRequest) throws AccountNotFoundException {
         final var optionalAccount = accountRepositoryPort.getById(transactionRequest.getAccountId());
         if (optionalAccount.isEmpty()) {
-            throw new AccountNotFoundException();
+            throw new AccountNotFoundError(transactionRequest.getAccountId());
         }
         final OperationTypeEnum operationType = OperationTypeEnum.getByKey(transactionRequest.getOperationTypeId());
         return Pair.of(optionalAccount.get().toAccount(), operationType);

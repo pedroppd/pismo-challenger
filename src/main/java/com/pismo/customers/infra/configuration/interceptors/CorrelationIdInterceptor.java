@@ -16,13 +16,13 @@ import static org.apache.logging.log4j.util.Strings.isEmpty;
 public class CorrelationIdInterceptor implements HandlerInterceptor {
 
     private static final String CORRELATION_ID = "correlationId";
-
+    private static final String CORRELATION_HEADER = "x-correlation-id";
 
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) {
-        final var correlationId = request.getHeader("x-correlation-id");
+        final var correlationId = request.getHeader(CORRELATION_HEADER);
         final var correlationIdGenerated = isEmpty(correlationId) ? UUID.randomUUID().toString() : correlationId;
         MDC.put(CORRELATION_ID, correlationIdGenerated);
         return true;
@@ -30,6 +30,6 @@ public class CorrelationIdInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        //MDC.remove(CORRELATION_ID);
+        MDC.remove(CORRELATION_ID);
     }
 }

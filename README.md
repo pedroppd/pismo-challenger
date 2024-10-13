@@ -41,7 +41,7 @@ Este projeto implementa um sistema de transações financeiras associadas a cont
 ## Executando a Aplicação
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seuusuario/customer-transactions.git
+    git clone https://github.com/pedroppd/pismo-challenger.git
     ```
 2. Acesse o diretório do projeto:
     ```bash
