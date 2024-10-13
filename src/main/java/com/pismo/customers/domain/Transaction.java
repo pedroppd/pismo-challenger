@@ -1,7 +1,6 @@
 package com.pismo.customers.domain;
 
 import com.pismo.customers.domain.enums.OperationTypeEnum;
-import com.pismo.customers.infra.adapters.entities.AccountEntity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,6 +1,5 @@
 package com.pismo.customers.infra.configuration.exception;
 
-import com.pismo.customers.domain.adapters.impl.AccountServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -8,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -2,8 +2,6 @@ package com.pismo.customers.infra.configuration.interceptors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -22,8 +20,8 @@ public class CorrelationIdInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) {
-        final var correlationId = request.getHeader(CORRELATION_HEADER);
-        final var correlationIdGenerated = isEmpty(correlationId) ? UUID.randomUUID().toString() : correlationId;
+        final String correlationId = request.getHeader(CORRELATION_HEADER);
+        final String correlationIdGenerated = isEmpty(correlationId) ? UUID.randomUUID().toString() : correlationId;
         MDC.put(CORRELATION_ID, correlationIdGenerated);
         return true;
     }

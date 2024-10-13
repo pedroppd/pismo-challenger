@@ -9,7 +9,9 @@ import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
 import com.pismo.customers.infra.configuration.exception.InvalidAccountException;
 import com.pismo.customers.infra.configuration.exception.SaveAccountException;
+
 import java.util.Optional;
+
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 public class AccountServiceImpl {

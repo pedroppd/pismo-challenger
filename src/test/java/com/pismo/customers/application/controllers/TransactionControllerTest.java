@@ -3,7 +3,6 @@ package com.pismo.customers.application.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pismo.customers.application.controllers.dto.request.TransactionRequestDTO;
 import com.pismo.customers.application.controllers.dto.response.TransactionResponseDTO;
-import com.pismo.customers.domain.adapters.impl.AccountServiceImpl;
 import com.pismo.customers.domain.enums.OperationTypeEnum;
 import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.adapters.entities.TransactionEntity;
@@ -24,8 +23,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import java.util.Optional;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
