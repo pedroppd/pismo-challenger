@@ -1,1 +1,0 @@
-INSERT INTO operations_types (id, description) VALUES (1, 'PURCHASE');

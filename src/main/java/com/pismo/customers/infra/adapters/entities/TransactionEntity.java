@@ -50,7 +50,6 @@ public class TransactionEntity {
                 .operationTypeId(this.getOperationType().getKey())
                 .amount(this.getAmount())
                 .build();
-
     }
 
 }
