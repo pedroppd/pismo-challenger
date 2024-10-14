@@ -23,7 +23,7 @@ public class Transaction {
                        final Double amount) {
         this.account = Objects.requireNonNull(account);
         this.operationType = Objects.requireNonNull(operationType);
-        this.amount = amount;
+        this.amount = Objects.requireNonNull(amount);
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.n");
         this.eventDate = LocalDateTime.now().format(formatter);
     }

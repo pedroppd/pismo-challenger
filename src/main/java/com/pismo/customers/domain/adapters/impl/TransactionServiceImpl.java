@@ -14,6 +14,7 @@ import org.springframework.data.util.Pair;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
+import java.util.EnumSet;
 import java.util.Optional;
 
 public class TransactionServiceImpl {
@@ -39,10 +40,12 @@ public class TransactionServiceImpl {
     }
 
     private Double getAmountByOperationType(final Double amount, final OperationTypeEnum operationType) {
-        final String operationTypeValue = operationType.getValue();
-        if (OperationTypeEnum.PURCHASE.getValue().equals(operationTypeValue) ||
-                OperationTypeEnum.INSTALLMENT_PURCHASE.getValue().equals(operationTypeValue) ||
-                OperationTypeEnum.WITHDRAWAL.getValue().equals(operationTypeValue)) {
+        EnumSet<OperationTypeEnum> debtOperations = EnumSet.of(
+                OperationTypeEnum.PURCHASE,
+                OperationTypeEnum.INSTALLMENT_PURCHASE,
+                OperationTypeEnum.WITHDRAWAL
+        );
+        if (debtOperations.contains(operationType)) {
             return BigDecimal.valueOf(amount).negate().doubleValue();
         }
         return amount;
