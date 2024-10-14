@@ -6,8 +6,6 @@ import com.pismo.customers.infra.adapters.entities.TransactionEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 @AllArgsConstructor
 public class TransactionRepositoryImpl implements TransactionRepositoryPort {
@@ -15,9 +13,8 @@ public class TransactionRepositoryImpl implements TransactionRepositoryPort {
     private final SpringTransactionRepository springTransactionRepository;
 
     @Override
-    public Optional<TransactionEntity> save(final Transaction transaction) {
+    public TransactionEntity save(final Transaction transaction) {
         final TransactionEntity transactionEntity = new TransactionEntity(transaction);
-        final TransactionEntity transactionEntityResponse = springTransactionRepository.save(transactionEntity);
-        return Optional.of(transactionEntityResponse);
+        return springTransactionRepository.save(transactionEntity);
     }
 }

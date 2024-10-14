@@ -52,7 +52,7 @@ public class TransactionControllerTest {
     @Test
     public void stage1_shouldReturnNewTransaction() throws Exception {
         final Optional<AccountEntity> mockAccount = Optional.of(AccountEntity.builder().id(1L).documentNumber("1234567").build());
-        final Optional<TransactionEntity> mockTransaction = Optional.of(TransactionEntity.builder().account(mockAccount.get()).id(1L).amount(-1000.0).operationType(OperationTypeEnum.INSTALLMENT_PURCHASE).build());
+        final TransactionEntity mockTransaction = TransactionEntity.builder().account(mockAccount.get()).id(1L).amount(-1000.0).operationType(OperationTypeEnum.INSTALLMENT_PURCHASE).build();
 
         when(accountRepositoryImpl.getById(any())).thenReturn(mockAccount);
         when(transactionRepositoryImpl.save(any())).thenReturn(mockTransaction);

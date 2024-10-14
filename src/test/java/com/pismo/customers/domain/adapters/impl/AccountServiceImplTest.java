@@ -6,7 +6,6 @@ import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.adapters.repositories.AccountRepositoryImpl;
 import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
 import com.pismo.customers.infra.configuration.exception.InvalidAccountException;
-import com.pismo.customers.infra.configuration.exception.SaveAccountException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,12 +27,6 @@ public class AccountServiceImplTest {
     @InjectMocks
     private AccountServiceImpl accountServiceImpl;
 
-    @Test(expected = SaveAccountException.class)
-    public void salvarAccountError() {
-        final var accountRequestMock = createAccountRequestDTOMock();
-        when(accountRepositoryImpl.save(any())).thenReturn(Optional.empty());
-        accountServiceImpl.save(accountRequestMock);
-    }
 
     @Test
     public void salvarAccountSuccess() {
@@ -48,7 +41,7 @@ public class AccountServiceImplTest {
     @Test
     public void getAccountSuccess() {
         final var accountRequestMock = createAccountEntityMock();
-        when(accountRepositoryImpl.getById(any())).thenReturn(accountRequestMock);
+        when(accountRepositoryImpl.getById(any())).thenReturn(Optional.of(accountRequestMock));
         final AccountResponseDTO accountResponse = accountServiceImpl.getById(1L);
         Assert.assertNotNull(accountResponse);
         Assert.assertNotNull(accountResponse.getId());
@@ -58,7 +51,7 @@ public class AccountServiceImplTest {
     @Test(expected = InvalidAccountException.class)
     public void getAccountException() {
         final var accountRequestMock = createAccountEntityMock();
-        when(accountRepositoryImpl.getById(any())).thenReturn(accountRequestMock);
+        when(accountRepositoryImpl.getById(any())).thenReturn(Optional.of(accountRequestMock));
         accountServiceImpl.getById(null);
     }
 
@@ -68,8 +61,8 @@ public class AccountServiceImplTest {
         accountServiceImpl.getById(1L);
     }
 
-    public Optional<AccountEntity> createAccountEntityMock() {
-        return Optional.of(AccountEntity.builder().id(1L).documentNumber("12345678900").build());
+    public AccountEntity createAccountEntityMock() {
+        return AccountEntity.builder().id(1L).documentNumber("12345678900").build();
     }
 
     public static AccountRequestDTO createAccountRequestDTOMock() {

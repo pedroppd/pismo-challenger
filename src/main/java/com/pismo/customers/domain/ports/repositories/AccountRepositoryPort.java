@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface AccountRepositoryPort {
 
-    Optional<AccountEntity> save(final Account account);
+    AccountEntity save(final Account account);
     Optional<AccountEntity> getById(final Long id);
 }

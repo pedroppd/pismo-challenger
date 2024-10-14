@@ -7,7 +7,7 @@ import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.adapters.entities.TransactionEntity;
 import com.pismo.customers.infra.adapters.repositories.AccountRepositoryImpl;
 import com.pismo.customers.infra.adapters.repositories.TransactionRepositoryImpl;
-import com.pismo.customers.infra.configuration.exception.SaveTransactionException;
+import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -34,25 +34,17 @@ public class TransactionServiceImplTest {
     @InjectMocks
     private TransactionServiceImpl transactionServiceImpl;
 
-    @Test(expected = AccountNotFoundException.class)
+    @Test(expected = AccountNotFoundError.class)
     public void getTransactionAccountError() throws AccountNotFoundException {
         final var transactionRequest = createTransactionRequestDTOMock(1L, 350.00, 2);
         transactionServiceImpl.save(transactionRequest);
         when(accountRepositoryImpl.getById(any())).thenReturn(Optional.empty());
     }
 
-    @Test(expected = SaveTransactionException.class)
-    public void saveTransactionError() throws AccountNotFoundException {
-        final Optional<AccountEntity> accountEntity = Optional.of(AccountEntity.builder().id(1L).documentNumber("1234567").build());
-        when(accountRepositoryImpl.getById(any())).thenReturn(accountEntity);
-        final var transactionRequest = createTransactionRequestDTOMock(1L, 350.00, 2);
-        transactionServiceImpl.save(transactionRequest);
-    }
-
     @Test
     public void saveTransactionSuccess() throws AccountNotFoundException {
         final Optional<AccountEntity> accountEntity = Optional.of(AccountEntity.builder().id(1L).documentNumber("1234567").build());
-        final Optional<TransactionEntity> transaction = Optional.of(TransactionEntity.builder().id(1L).account(accountEntity.get()).operationType(OperationTypeEnum.INSTALLMENT_PURCHASE).amount(-355.00).eventDate("").build());
+        final TransactionEntity transaction = TransactionEntity.builder().id(1L).account(accountEntity.get()).operationType(OperationTypeEnum.INSTALLMENT_PURCHASE).amount(-355.00).eventDate("").build();
         when(accountRepositoryImpl.getById(any())).thenReturn(accountEntity);
         when(transactionRepository.save(any())).thenReturn(transaction);
         final var transactionRequest = createTransactionRequestDTOMock(1L, 355.00, 2);
@@ -64,7 +56,7 @@ public class TransactionServiceImplTest {
     @Test
     public void saveTransactionSuccessAndAmountValueisPositive() throws AccountNotFoundException {
         final Optional<AccountEntity> accountEntity = Optional.of(AccountEntity.builder().id(1L).documentNumber("1234567").build());
-        final Optional<TransactionEntity> transaction = Optional.of(TransactionEntity.builder().id(1L).account(accountEntity.get()).operationType(OperationTypeEnum.PAYMENT).amount(355.00).eventDate("").build());
+        final TransactionEntity transaction = TransactionEntity.builder().id(1L).account(accountEntity.get()).operationType(OperationTypeEnum.PAYMENT).amount(355.00).eventDate("").build();
         when(accountRepositoryImpl.getById(any())).thenReturn(accountEntity);
         when(transactionRepository.save(any())).thenReturn(transaction);
         final var transactionRequest = createTransactionRequestDTOMock(1L, 355.00, 4);

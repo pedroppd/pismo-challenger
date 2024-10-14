@@ -15,9 +15,9 @@ public class AccountRepositoryImpl implements AccountRepositoryPort {
     private final SpringAccountRepository springAccountRepository;
 
     @Override
-    public Optional<AccountEntity> save(final Account account) {
+    public AccountEntity save(final Account account) {
         final AccountEntity accountEntity = new AccountEntity(account);
-        return Optional.of(springAccountRepository.save(accountEntity));
+        return springAccountRepository.save(accountEntity);
     }
 
     @Override

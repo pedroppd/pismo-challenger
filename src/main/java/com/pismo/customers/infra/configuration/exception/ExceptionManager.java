@@ -15,20 +15,6 @@ public class ExceptionManager {
 
     private final Logger logger = LoggerFactory.getLogger(ExceptionManager.class);
 
-
-    @ExceptionHandler(SaveAccountException.class)
-    public ResponseEntity<ApiError> saveAccountException(final SaveAccountException ex) {
-        logger.error("An error occurred when trying to save the account");
-        final ApiError apiError = ApiError
-                .builder()
-                .timestamp(LocalDateTime.now())
-                .code(HttpStatus.BAD_REQUEST.value())
-                .status(HttpStatus.BAD_REQUEST.name())
-                .errors(List.of(ex.getMessage()))
-                .build();
-        return ResponseEntity.badRequest().body(apiError);
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> genericException(final Exception ex) {
         logger.error("Unexpected error occurred: {}", ex.getMessage());

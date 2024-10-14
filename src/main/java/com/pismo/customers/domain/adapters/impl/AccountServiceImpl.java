@@ -8,7 +8,6 @@ import com.pismo.customers.domain.ports.repositories.AccountRepositoryPort;
 import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
 import com.pismo.customers.infra.configuration.exception.InvalidAccountException;
-import com.pismo.customers.infra.configuration.exception.SaveAccountException;
 
 import java.util.Optional;
 
@@ -24,11 +23,8 @@ public class AccountServiceImpl {
 
     public AccountResponseDTO save(final AccountRequestDTO accountRequestDTO) {
         final Account account = new Account(accountRequestDTO.getDocumentNumber());
-        final Optional<AccountEntity> accountEntity = this.accountRepository.save(account);
-        if (accountEntity.isEmpty()) {
-            throw new SaveAccountException();
-        }
-        return accountEntity.get().toAccountResponseDTO();
+        final AccountEntity accountEntity = this.accountRepository.save(account);
+        return accountEntity.toAccountResponseDTO();
     }
 
     public AccountResponseDTO getById(final Long id) {

@@ -9,13 +9,11 @@ import com.pismo.customers.domain.ports.repositories.AccountRepositoryPort;
 import com.pismo.customers.domain.ports.repositories.TransactionRepositoryPort;
 import com.pismo.customers.infra.adapters.entities.TransactionEntity;
 import com.pismo.customers.infra.configuration.exception.AccountNotFoundError;
-import com.pismo.customers.infra.configuration.exception.SaveTransactionException;
 import org.springframework.data.util.Pair;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.EnumSet;
-import java.util.Optional;
 
 public class TransactionServiceImpl {
 
@@ -32,11 +30,8 @@ public class TransactionServiceImpl {
         final var pairResponse = getAccountAndOperationId(transactionRequest);
         final var amount = getAmountByOperationType(transactionRequest.getAmount(), pairResponse.getSecond());
         final Transaction transaction = new Transaction(pairResponse.getFirst(), pairResponse.getSecond(), amount);
-        final Optional<TransactionEntity> transactionEntity = this.transactionRepository.save(transaction);
-        if (transactionEntity.isEmpty()) {
-            throw new SaveTransactionException();
-        }
-        return transactionEntity.get().toTransactionResponseDTO();
+        final TransactionEntity transactionEntity = this.transactionRepository.save(transaction);
+        return transactionEntity.toTransactionResponseDTO();
     }
 
     private Double getAmountByOperationType(final Double amount, final OperationTypeEnum operationType) {

@@ -37,7 +37,7 @@ public class TransactionEntity {
 
     public TransactionEntity(final Transaction transaction) {
         this.id = transaction.getId();
-        this.account = transaction.getAccount().toAccountEntity();
+        this.account = new AccountEntity(transaction.getAccount());
         this.amount = transaction.getAmount();
         this.eventDate = transaction.getEventDate();
         this.operationType = transaction.getOperationType();

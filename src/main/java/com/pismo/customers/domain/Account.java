@@ -1,7 +1,5 @@
 package com.pismo.customers.domain;
 
-import com.pismo.customers.infra.adapters.entities.AccountEntity;
-
 import java.util.Objects;
 
 public class Account {
@@ -11,12 +9,12 @@ public class Account {
     private String documentNumber;
 
     public Account(Long id, String documentNumber) {
-        this.id = id;
-        this.documentNumber = documentNumber;
+        this.id = Objects.requireNonNull(id);
+        this.documentNumber = Objects.requireNonNull(documentNumber);
     }
 
     public Account(String documentNumber) {
-        this.documentNumber = documentNumber;
+        this.documentNumber = Objects.requireNonNull(documentNumber);
     }
 
     public Long getId() {
@@ -25,10 +23,6 @@ public class Account {
 
     public String getDocumentNumber() {
         return this.documentNumber;
-    }
-
-    public AccountEntity toAccountEntity() {
-        return AccountEntity.builder().documentNumber(this.getDocumentNumber()).id(this.getId()).build();
     }
 
     @Override
