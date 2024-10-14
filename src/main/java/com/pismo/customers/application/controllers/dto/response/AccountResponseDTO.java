@@ -1,5 +1,6 @@
 package com.pismo.customers.application.controllers.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -8,5 +9,6 @@ import lombok.Getter;
 public class AccountResponseDTO {
     private Long id;
 
+    @JsonProperty("document_number")
     private String documentNumber;
 }

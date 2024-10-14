@@ -16,8 +16,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public TransactionServiceImpl transactionServiceImpl(final TransactionRepositoryImpl transactionRepositoryImpl,
-                                                         final AccountRepositoryImpl accountRepositoryImpl) {
+    public TransactionServiceImpl transactionServiceImpl(final TransactionRepositoryImpl transactionRepositoryImpl, final AccountRepositoryImpl accountRepositoryImpl) {
         return new TransactionServiceImpl(transactionRepositoryImpl, accountRepositoryImpl);
     }
 }
