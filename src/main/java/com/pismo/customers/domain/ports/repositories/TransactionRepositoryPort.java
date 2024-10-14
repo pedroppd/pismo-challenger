@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface TransactionRepositoryPort {
 
-    Optional<TransactionEntity> save(Transaction account);
+    Optional<TransactionEntity> save(final Transaction account);
 }

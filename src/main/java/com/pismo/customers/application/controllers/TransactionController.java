@@ -25,7 +25,7 @@ public class TransactionController {
 
 
     @PostMapping
-    public ResponseEntity<TransactionResponseDTO> register(@RequestBody TransactionRequestDTO transactionRequest) throws AccountNotFoundException {
+    public ResponseEntity<TransactionResponseDTO> register(@RequestBody final TransactionRequestDTO transactionRequest) throws AccountNotFoundException {
         logger.info("Starting process to save transaction");
         final TransactionResponseDTO transactionResponseDTO = transactionService.save(transactionRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionResponseDTO);

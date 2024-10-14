@@ -35,7 +35,7 @@ public class TransactionEntity {
     @Column(name = "event_date", nullable = false)
     private String eventDate;
 
-    public TransactionEntity(Transaction transaction) {
+    public TransactionEntity(final Transaction transaction) {
         this.id = transaction.getId();
         this.account = transaction.getAccount().toAccountEntity();
         this.amount = transaction.getAmount();

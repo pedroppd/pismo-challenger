@@ -23,7 +23,7 @@ public class AccountsController {
 
 
     @PostMapping
-    public ResponseEntity<AccountResponseDTO> register(@RequestBody AccountRequestDTO accountRequestDTO,
+    public ResponseEntity<AccountResponseDTO> register(@RequestBody final AccountRequestDTO accountRequestDTO,
                                                        UriComponentsBuilder uriBuilder) {
         logger.info("Starting the account creation...");
         final AccountResponseDTO accountResponse = accountService.save(accountRequestDTO);
@@ -32,7 +32,7 @@ public class AccountsController {
     }
 
     @GetMapping("/{accountId}")
-    public ResponseEntity<AccountResponseDTO> getById(@PathVariable Long accountId) {
+    public ResponseEntity<AccountResponseDTO> getById(@PathVariable final Long accountId) {
         logger.info("Starting account search {} ...", accountId);
         final AccountResponseDTO accountResponse = accountService.getById(accountId);
         return ResponseEntity.ok().body(accountResponse);

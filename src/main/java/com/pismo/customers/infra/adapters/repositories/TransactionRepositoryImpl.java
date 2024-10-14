@@ -15,7 +15,7 @@ public class TransactionRepositoryImpl implements TransactionRepositoryPort {
     private final SpringTransactionRepository springTransactionRepository;
 
     @Override
-    public Optional<TransactionEntity> save(Transaction transaction) {
+    public Optional<TransactionEntity> save(final Transaction transaction) {
         final TransactionEntity transactionEntity = new TransactionEntity(transaction);
         final TransactionEntity transactionEntityResponse = springTransactionRepository.save(transactionEntity);
         return Optional.of(transactionEntityResponse);

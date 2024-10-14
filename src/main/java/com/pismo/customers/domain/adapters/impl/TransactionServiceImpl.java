@@ -43,15 +43,15 @@ public class TransactionServiceImpl {
         EnumSet<OperationTypeEnum> debtOperations = EnumSet.of(
                 OperationTypeEnum.PURCHASE,
                 OperationTypeEnum.INSTALLMENT_PURCHASE,
-                OperationTypeEnum.WITHDRAWAL
-        );
+                OperationTypeEnum.WITHDRAWAL);
+
         if (debtOperations.contains(operationType)) {
             return BigDecimal.valueOf(amount).negate().doubleValue();
         }
         return amount;
     }
 
-    private Pair<Account, OperationTypeEnum> getAccountAndOperationId(TransactionRequestDTO transactionRequest) throws AccountNotFoundException {
+    private Pair<Account, OperationTypeEnum> getAccountAndOperationId(final TransactionRequestDTO transactionRequest) throws AccountNotFoundException {
         final var optionalAccount = accountRepositoryPort.getById(transactionRequest.getAccountId());
         if (optionalAccount.isEmpty()) {
             throw new AccountNotFoundError(transactionRequest.getAccountId());
