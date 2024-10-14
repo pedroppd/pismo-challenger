@@ -4,7 +4,7 @@ public class AccountNotFoundError extends RuntimeException {
 
     private Long id;
 
-    public AccountNotFoundError(Long accountId) {
+    public AccountNotFoundError(final Long accountId) {
         super("Account Not Found");
         this.id = accountId;
     }

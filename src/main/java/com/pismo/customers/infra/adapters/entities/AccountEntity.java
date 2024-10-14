@@ -22,6 +22,7 @@ public class AccountEntity {
     private String documentNumber;
 
     public AccountEntity(Account account) {
+        this.id = account.getId();
         this.documentNumber = account.getDocumentNumber();
     }
 

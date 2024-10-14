@@ -21,7 +21,7 @@ public class AccountRepositoryImpl implements AccountRepositoryPort {
     }
 
     @Override
-    public Optional<AccountEntity> getById(Long id) {
+    public Optional<AccountEntity> getById(final Long id) {
         return springAccountRepository.findById(id);
     }
 }
