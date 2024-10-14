@@ -16,8 +16,7 @@ Este projeto implementa um sistema de transações financeiras associadas a cont
 ## Modelos de Dados
 ### Conta (`Account`)
 - **ID**: Identificador único da conta.
-- **Cliente**: Cliente proprietário da conta.
-- **Saldo**: Total de saldo disponível na conta.
+- **número documento**: Documento do cliente proprietário da conta.
 
 ### Transação (`Transaction`)
 - **ID**: Identificador único da transação.
