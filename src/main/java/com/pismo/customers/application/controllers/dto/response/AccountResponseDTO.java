@@ -7,6 +7,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AccountResponseDTO {
+
+    @JsonProperty("account_id")
     private Long id;
 
     @JsonProperty("document_number")

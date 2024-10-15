@@ -29,7 +29,7 @@ public class AccountServiceImplTest {
 
 
     @Test
-    public void salvarAccountSuccess() {
+    public void saveAccountSuccess() {
         final var accountRequestMock = createAccountEntityMock();
         when(accountRepositoryImpl.save(any())).thenReturn(accountRequestMock);
         final var accountResponse = accountServiceImpl.save(createAccountRequestDTOMock());
