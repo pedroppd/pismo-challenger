@@ -9,4 +9,5 @@ import lombok.*;
 @AllArgsConstructor
 public class AccountRequestDTO {
     private String documentNumber;
+    private Double creditLimit;
 }

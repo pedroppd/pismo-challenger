@@ -35,13 +35,13 @@ public class TransactionServiceImpl {
     }
 
     private Double getAmountByOperationType(final Double amount, final OperationTypeEnum operationType) {
-        EnumSet<OperationTypeEnum> debtOperations = EnumSet.of(
+        final EnumSet<OperationTypeEnum> debtOperations = EnumSet.of(
                 OperationTypeEnum.PURCHASE,
                 OperationTypeEnum.INSTALLMENT_PURCHASE,
                 OperationTypeEnum.WITHDRAWAL);
-
+        final var value = BigDecimal.valueOf(amount).abs();
         if (debtOperations.contains(operationType)) {
-            return BigDecimal.valueOf(amount).negate().doubleValue();
+            return value.negate().doubleValue();
         }
         return amount;
     }

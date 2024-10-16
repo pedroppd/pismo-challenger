@@ -18,7 +18,9 @@ public class Transaction {
 
     private String eventDate;
 
-    public Transaction(final Account account, final OperationTypeEnum operationType, final Double amount) {
+    public Transaction(final Account account,
+                       final OperationTypeEnum operationType,
+                       final Double amount) {
         this.account = Objects.requireNonNull(account);
         this.operationType = Objects.requireNonNull(operationType);
         this.amount = Objects.requireNonNull(amount);

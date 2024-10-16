@@ -5,7 +5,8 @@ public enum OperationTypeEnum {
     PURCHASE(1, "PURCHASE"),
     INSTALLMENT_PURCHASE(2, "INSTALLMENT PURCHASE"),
     WITHDRAWAL(3, "WITHDRAWAL"),
-    PAYMENT(4, "PAYMENT");
+    PAYMENT(4, "PAYMENT"),
+    TRANSFER(5, "TRANSFER");
 
     private final int key;
     private final String value;

@@ -28,6 +28,7 @@ public class AccountsController {
         logger.info("Starting the account creation...");
         final AccountResponseDTO accountResponse = accountService.save(accountRequestDTO);
         final URI uri = uriBuilder.path("/accounts/{accountId}").buildAndExpand(accountResponse.getId()).toUri();
+        logger.info("Finalizando processamento...");
         return ResponseEntity.created(uri).body(accountResponse);
     }
 

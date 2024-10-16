@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
+
 @Entity
 @Table(name = "transactions")
 @Getter
@@ -37,10 +41,10 @@ public class TransactionEntity {
 
     public TransactionEntity(final Transaction transaction) {
         this.id = transaction.getId();
-        this.account = new AccountEntity(transaction.getAccount());
-        this.amount = transaction.getAmount();
-        this.eventDate = transaction.getEventDate();
-        this.operationType = transaction.getOperationType();
+        this.account = new AccountEntity(requireNonNull(transaction.getAccount()));
+        this.amount = requireNonNull(transaction.getAmount());
+        this.eventDate = requireNonNull(transaction.getEventDate());
+        this.operationType = requireNonNull(transaction.getOperationType());
     }
 
     public TransactionResponseDTO toTransactionResponseDTO() {

@@ -13,4 +13,9 @@ public class AccountResponseDTO {
 
     @JsonProperty("document_number")
     private String documentNumber;
+
+    @JsonProperty("credit_limit")
+    private Double creditLimit;
+
+
 }

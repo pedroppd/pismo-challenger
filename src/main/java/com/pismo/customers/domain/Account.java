@@ -2,19 +2,36 @@ package com.pismo.customers.domain;
 
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 public class Account {
 
     private Long id;
 
     private String documentNumber;
 
-    public Account(Long id, String documentNumber) {
-        this.id = Objects.requireNonNull(id);
-        this.documentNumber = Objects.requireNonNull(documentNumber);
+    private Double balance;
+
+    private Double creditLimit;
+
+    public Account(Long id, String documentNumber, Double creditLimit) {
+        this.id = id;
+        this.documentNumber = requireNonNull(documentNumber);
+        this.creditLimit = requireNonNull(creditLimit);
+        this.balance = 0.0;
+    }
+    public Account(String documentNumber, Double creditLimit) {
+        this.documentNumber = requireNonNull(documentNumber);
+        this.creditLimit = requireNonNull(creditLimit);
+        this.balance = 0.0;
     }
 
-    public Account(String documentNumber) {
-        this.documentNumber = Objects.requireNonNull(documentNumber);
+    public Double getBalance() {
+        return this.balance;
+    }
+
+    public Double getCreditLimit() {
+        return this.creditLimit;
     }
 
     public Long getId() {
