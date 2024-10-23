@@ -17,3 +17,5 @@ jobs:
           java-version: '21'
       - name: Install Dependencies
         run: mvn clean install
+      - name: Run test
+        run: mvn clean test
