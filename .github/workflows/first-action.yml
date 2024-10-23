@@ -5,12 +5,15 @@ on:
       - 'main'
       - 'feature/**'
 jobs:
-  first-job:
+  test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Realizando testes unitários
-        run: echo "Testes sendo executados"
-      - name: Validando código
-        run: echo "IA está validando o código"
-      - name: Realizando deploy
-        run: echo "Realizando deploy"
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+      - name: Install Dependencies
+        run: mvn clean install
