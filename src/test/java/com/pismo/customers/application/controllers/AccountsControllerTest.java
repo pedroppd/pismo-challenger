@@ -4,28 +4,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pismo.customers.application.controllers.dto.request.AccountRequestDTO;
 import com.pismo.customers.application.controllers.dto.response.AccountResponseDTO;
 import com.pismo.customers.infra.configuration.exception.ApiError;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AccountsControllerTest {
 
     @Autowired
@@ -35,9 +33,10 @@ public class AccountsControllerTest {
     private ObjectMapper mapper;
 
     @Test
+    @Order(1)
     public void stage1_shouldReturnNewAccount() throws Exception {
         final String EXPECTED_RESULT = "1234567";
-        final AccountRequestDTO request = AccountRequestDTO.builder().documentNumber("1234567").build();
+        final AccountRequestDTO request = AccountRequestDTO.builder().creditLimit(1000D).documentNumber("1234567").build();
 
         final String requestAsString = mapper.writeValueAsString(request);
 
@@ -58,6 +57,7 @@ public class AccountsControllerTest {
     }
 
     @Test
+    @Order(2)
     public void stage2_shouldReturnAccount() throws Exception {
         final String EXPECTED_RESULT = "1234567";
         final Long accountId = 1L;
@@ -79,6 +79,7 @@ public class AccountsControllerTest {
     }
 
     @Test
+    @Order(3)
     public void stage3_shouldReturnError() throws Exception {
         final Long accountId = 2L;
 

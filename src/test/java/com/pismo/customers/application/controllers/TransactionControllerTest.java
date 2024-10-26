@@ -8,33 +8,29 @@ import com.pismo.customers.infra.adapters.entities.AccountEntity;
 import com.pismo.customers.infra.adapters.entities.TransactionEntity;
 import com.pismo.customers.infra.adapters.repositories.AccountRepositoryImpl;
 import com.pismo.customers.infra.adapters.repositories.TransactionRepositoryImpl;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import java.util.Optional;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TransactionControllerTest {
 
     @Autowired
@@ -50,8 +46,9 @@ public class TransactionControllerTest {
     private TransactionRepositoryImpl transactionRepositoryImpl;
 
     @Test
+    @Order(1)
     public void stage1_shouldReturnNewTransaction() throws Exception {
-        final Optional<AccountEntity> mockAccount = Optional.of(AccountEntity.builder().id(1L).documentNumber("1234567").build());
+        final Optional<AccountEntity> mockAccount = Optional.of(AccountEntity.builder().id(1L).creditLimit(1000D).documentNumber("1234567").build());
         final TransactionEntity mockTransaction = TransactionEntity.builder().account(mockAccount.get()).id(1L).amount(-1000.0).operationType(OperationTypeEnum.INSTALLMENT_PURCHASE).build();
 
         when(accountRepositoryImpl.getById(any())).thenReturn(mockAccount);
