@@ -20,6 +20,7 @@ jobs:
       - name: Run test
         run: mvn clean test
   deploy-job:
+    needs: test-job
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
