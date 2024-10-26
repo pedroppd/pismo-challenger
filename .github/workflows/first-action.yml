@@ -19,3 +19,19 @@ jobs:
         run: mvn clean install
       - name: Run test
         run: mvn clean test
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+      - name: Install Dependencies
+        run: mvn clean install
+      - name: Run test
+        run: mvn clean test
+      - name: Deploy
+        run: echo "Deploying..."
