@@ -13,7 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +33,7 @@ public class AccountServiceImplTest {
         final var accountRequestMock = createAccountEntityMock();
         when(accountRepositoryImpl.save(any())).thenReturn(accountRequestMock);
         final var accountResponse = accountServiceImpl.save(createAccountRequestDTOMock());
-        assertNull(accountResponse);
+        assertNotNull(accountResponse);
         assertNotNull(accountResponse.getId());
         assertNotNull(accountResponse.getDocumentNumber());
     }
