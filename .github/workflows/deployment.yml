@@ -50,9 +50,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-      - name: Install Dependencies
-        run: mvn clean install
-      - name: Run test
-        run: mvn clean test
-      - name: Deploy
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-file
+      - name: output contents
+        run: ls
+      - name: Get build artifacts
         run: echo "Deploying..."
