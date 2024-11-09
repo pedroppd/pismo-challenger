@@ -5,7 +5,7 @@ on:
       - 'main'
       - 'feature/**'
 jobs:
-  test:
+  test-job:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -27,7 +27,7 @@ jobs:
       - name: Run test
         run: mvn clean test
   build-job:
-    needs: test-job
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
