@@ -69,10 +69,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-      - name: Get build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-file
       - name: output contents
         run: ls
       - name: Get build artifacts
